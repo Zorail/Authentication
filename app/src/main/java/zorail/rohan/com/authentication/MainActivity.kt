@@ -1,5 +1,6 @@
 package zorail.rohan.com.authentication
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -12,11 +13,15 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.*
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.indeterminateProgressDialog
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListener{
 
     lateinit private var mAuth:FirebaseAuth
     lateinit var mGoogleApiClient:GoogleApiClient
+    lateinit var dialog:ProgressDialog
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,17 +41,19 @@ class MainActivity : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListe
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        Toast.makeText(this,"Google Play Services Error"+p0.errorMessage,Toast.LENGTH_SHORT).show();
+        toast("Google Play Services Error" + p0.errorMessage)
     }
 
     fun singIn(){
         val intent:Intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
         startActivityForResult(intent,9001)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 9001){
+            dialog = indeterminateProgressDialog(message = "Please wait a bit",title = "Fetching Data")
             val result:GoogleSignInResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if(result.isSuccess){
                 val account:GoogleSignInAccount = result.signInAccount!!
@@ -59,6 +66,7 @@ class MainActivity : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListe
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { p0 ->
                     if(p0.isSuccessful){
+                        dialog.dismiss()
                         val user:FirebaseUser = mAuth.currentUser!!
                         Toast.makeText(applicationContext,user.displayName,Toast.LENGTH_LONG).show()
                     }
