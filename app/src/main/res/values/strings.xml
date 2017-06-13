@@ -74,5 +74,7 @@
 
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
-    <string name="default_id">546148329561-qnq811c8lcacfgss81lrnda1hgtbc1uf.apps.googleusercontent.com</string>
+    <string name="defaultid">546148329561-qnq811c8lcacfgss81lrnda1hgtbc1uf.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">139844429916745</string>
+    <string name="fb_login_protocol_scheme">fb139844429916745</string>
 </resources>

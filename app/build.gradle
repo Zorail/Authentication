@@ -35,6 +35,9 @@ android {
         }
     }
 }
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -46,6 +49,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.firebase:firebase-auth:10.2.6'
     implementation 'com.google.android.gms:play-services-auth:10.2.6'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile("org.jetbrains.anko:anko:0.10.0") {
         exclude group: 'com.google.android', module: 'android'
     }

@@ -4,7 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,12 +22,11 @@ class MainActivity : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListe
     lateinit var mGoogleApiClient:GoogleApiClient
     lateinit var dialog:ProgressDialog
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val gso:GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_id))
+                .requestIdToken(getString(R.string.defaultid))
                 .requestEmail()
                 .build()
         mGoogleApiClient = GoogleApiClient.Builder(this)
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListe
         mAuth = FirebaseAuth.getInstance()
         sign_in_button.setOnClickListener { singIn() }
         sign_out_button.setOnClickListener { signOut() }
-
+        disconnect_button.setOnClickListener { revokeAccess() }
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
@@ -47,7 +46,6 @@ class MainActivity : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListe
     fun singIn(){
         val intent:Intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
         startActivityForResult(intent,9001)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -67,14 +65,27 @@ class MainActivity : AppCompatActivity(),GoogleApiClient.OnConnectionFailedListe
                 .addOnCompleteListener(this) { p0 ->
                     if(p0.isSuccessful){
                         dialog.dismiss()
+                        sign_in_button.visibility = View.GONE
+                        sign_out_and_disconnect.visibility = View.VISIBLE
                         val user:FirebaseUser = mAuth.currentUser!!
-                        Toast.makeText(applicationContext,user.displayName,Toast.LENGTH_LONG).show()
+                        status.text = user.displayName
                     }
                 }
     }
     fun signOut(){
         mAuth.signOut()
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback {
-            Toast.makeText(applicationContext,"Singed Out",Toast.LENGTH_SHORT).show() }
+            sign_in_button.visibility = View.VISIBLE
+            sign_out_and_disconnect.visibility = View.GONE
+            status.text = "Signed Out"
+        }
+    }
+    fun revokeAccess(){
+        mAuth.signOut()
+
+        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback {
+            sign_in_button.visibility = View.VISIBLE
+            sign_out_and_disconnect.visibility = View.GONE
+            status.text = "Signed Out" }
     }
 }
