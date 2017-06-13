@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "546148329561",
+    "firebase_url": "https://authentication-fa53d.firebaseio.com",
+    "project_id": "authentication-fa53d",
+    "storage_bucket": "authentication-fa53d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546148329561:android:b0c892f23c95a06f",
+        "android_client_info": {
+          "package_name": "zorail.rohan.com.authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546148329561-6fjs1vs5ljibombtsskt81fpf7d00248.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "zorail.rohan.com.authentication",
+            "certificate_hash": "8b1829cc9d935e9a7acb7c66d95bd4d9998a1792"
+          }
+        },
+        {
+          "client_id": "546148329561-qnq811c8lcacfgss81lrnda1hgtbc1uf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk87LOFdQak29s4ffvyBmuo-N14VsYgT0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546148329561-qnq811c8lcacfgss81lrnda1hgtbc1uf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
