@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
     <string name="app_name">Authentication</string>
 
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
@@ -77,4 +77,6 @@
     <string name="defaultid">546148329561-qnq811c8lcacfgss81lrnda1hgtbc1uf.apps.googleusercontent.com</string>
     <string name="facebook_app_id">139844429916745</string>
     <string name="fb_login_protocol_scheme">fb139844429916745</string>
+    <string name="twitter_Key">g3KPN1WJ7iYk100yG0OdP3r6q</string>
+    <string name="twitter_Secret">gg18c7zaMYZvLDdyVfayPVwlzI6rQTdGH9euhDxrMPqTG9ij0q</string>
 </resources>
