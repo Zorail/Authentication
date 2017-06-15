@@ -115,11 +115,11 @@ class PhoneLoginActivity:AppCompatActivity(){
     private fun updateUI(user:FirebaseUser?) {
         if (user != null)
         {
-            updateUI(PhoneLoginActivity.STATE_SIGNIN_SUCCESS, user)
+            updateUI(STATE_SIGNIN_SUCCESS, user)
         }
         else
         {
-            updateUI(PhoneLoginActivity.STATE_INITIALIZED)
+            updateUI(STATE_INITIALIZED)
         }
     }
     private fun updateUI(uiState:Int, user:FirebaseUser) {
@@ -130,21 +130,21 @@ class PhoneLoginActivity:AppCompatActivity(){
     }
     private fun updateUI(uiState:Int,user:FirebaseUser?,cred:PhoneAuthCredential?){
         when(uiState){
-            PhoneLoginActivity.STATE_INITIALIZED ->{
+            STATE_INITIALIZED ->{
                 enableViews(button_start_verification,field_phone_number)
                 disableViews(button_verify_phone,button_resend,field_verification_code)
                 detail.text = null
             }
-            PhoneLoginActivity.STATE_CODE_SENT ->{
+            STATE_CODE_SENT ->{
                 enableViews(button_verify_phone,button_resend,field_phone_number,field_verification_code)
                 disableViews(button_start_verification)
                 detail.text = getString(R.string.status_code_sent)
             }
-            PhoneLoginActivity.STATE_VERIFY_FAILED ->{
+            STATE_VERIFY_FAILED ->{
                 enableViews(button_start_verification,button_resend,button_verify_phone,field_verification_code,field_phone_number)
                 detail.text = getString(R.string.status_verification_failed)
             }
-            PhoneLoginActivity.STATE_VERIFY_SUCCESS ->{
+            STATE_VERIFY_SUCCESS ->{
                 disableViews(button_start_verification,button_verify_phone,button_resend,field_phone_number,field_verification_code)
                 detail.text = getString(R.string.status_verification_succeeded)
                 if(cred!=null){
@@ -154,8 +154,8 @@ class PhoneLoginActivity:AppCompatActivity(){
                         field_verification_code.setText(getString(R.string.instant_validation))
                 }
             }
-            PhoneLoginActivity.STATE_SIGNIN_FAILED ->detail.text = getString(R.string.status_sign_in_failed)
-            PhoneLoginActivity.STATE_SIGNIN_SUCCESS->Unit
+            STATE_SIGNIN_FAILED ->detail.text = getString(R.string.status_sign_in_failed)
+            STATE_SIGNIN_SUCCESS->Unit
         }
         if (user == null){
             phone_auth_fields.visibility = View.VISIBLE
