@@ -6,11 +6,7 @@ import android.support.annotation.MainThread
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.firebase.ui.auth.ResultCodes
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.firebaseui_phone.*
@@ -28,7 +24,7 @@ class AuthUILogin:AppCompatActivity(){
         setContentView(R.layout.firebaseui_phone)
         mAuth = FirebaseAuth.getInstance()
         button_start_verification.setOnClickListener { signIn() }
-        signed_in_buttons.setOnClickListener { signOut() }
+        sign_out_button.setOnClickListener { signOut() }
 
     }
     fun signIn():Unit{
